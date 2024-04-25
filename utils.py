@@ -168,13 +168,19 @@ class RandomAmp(AugBasic):
         return sample
 
 
-class RandomFlip(AugBasic):
+class RandomFlip:
     def __init__(self, p=0.5):
         self.p = p
 
     def __call__(self, sample):
+        # Ensure the sample data is a tensor
+        if isinstance(sample, np.ndarray):
+            sample = torch.from_numpy(sample).float()  # Convert to tensor if needed
+        elif not isinstance(sample, torch.Tensor):
+            raise TypeError("Sample data must be a tensor or numpy array")
+
         if random.random() < self.p:
-            sample.data = torch.flip(sample.data, dims=[-1, ])
+            sample = torch.flip(sample, dims=[-1,])  # Flip the tensor
         return sample
 
 

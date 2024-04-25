@@ -1,6 +1,6 @@
 from tqdm import tqdm
 import torch.optim as optim
-from model import LabelSmoothCrossEntropyLoss
+from model import LabelSmoothingLoss
 from dataset import get_dataset
 import torch
 import torch.nn as nn
@@ -37,14 +37,14 @@ def train_and_validate(model, criterion, device, train_loader, val_loader, optim
     print(f'Validation set: Average loss: {val_loss:.4f}, Accuracy: {correct}/{len(val_loader.dataset)} ({val_accuracy:.0f}%)')
     return val_loss, val_accuracy
 
-def train_model(data_dir, model, device, lr=0.01, momentum=0.9):
+def train_model(data_dir, model, device, lr=0.01, momentum=0.9, numclasses=4, epochs=200, batch_size=32):
     #train_loader, val_loader,_ = load_data(BATCH_SIZE,)
     train_loader, val_loader = get_dataset(data_dir)
-    optimizer = optim.SGD(model.parameters(), lr=learning_rate, momentum=momentum, weight_decay=weight_decay)
-    criterion = LabelSmoothingLoss(classes=NUM_CLASSES, smoothing=0.1)
+    optimizer = optim.SGD(model.parameters(), lr=lr, momentum=momentum, weight_decay=0.0005)
+    criterion = LabelSmoothingLoss(classes=numclasses, smoothing=0.1)
     scheduler = StepLR(optimizer,step_size=100,gamma=0.25)
 
-    for epoch in range(1, EPOCHS + 1):
+    for epoch in range(1, epochs + 1):
         train_and_validate(model, criterion, device, train_loader, val_loader, optimizer, epoch)
         scheduler.step()
         if epoch % 10 == 0:

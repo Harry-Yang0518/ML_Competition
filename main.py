@@ -45,9 +45,9 @@ if __name__ == '__main__':
     )
     model.to(device)
     data_dir = '/scratch/hy2611/ML_Competition/dataset'
-    train_model(data_dir, model, device)
+    train_model(data_dir, model, device, numclasses=4, epochs=200, batch_size=32)
 
-    torch.save(model, "Limbo.pth")
+    torch.save(model, "Sound.pth")
     
     # test_loader = load_data(BATCH_SIZE,)[2] 
     _, test_loader = get_dataset(data_dir)

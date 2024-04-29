@@ -1,170 +1,61 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from torch.nn.modules.loss import _WeightedLoss
-from torch.nn import init
 
-class LabelSmoothingLoss(nn.Module):
-    def __init__(self, classes, smoothing=0.1, dim=-1):
-        super(LabelSmoothingLoss, self).__init__()
-        self.confidence = 1.0 - smoothing
-        self.smoothing = smoothing
-        self.cls = classes
-        self.dim = dim
-    
-    def forward(self, pred, target):
-        pred = pred.log_softmax(dim=self.dim)
-        with torch.no_grad():
-            true_dist = torch.zeros_like(pred)
-            true_dist.fill_(self.smoothing / (self.cls - 1))
-            true_dist.scatter_(1, target.data.unsqueeze(1).long(), self.confidence)
-        return torch.mean(torch.sum(-true_dist * pred, dim=self.dim))
+class BasicBlock(nn.Module):
+    expansion = 1
 
+    def __init__(self, in_planes, planes, stride=1):
+        super(BasicBlock, self).__init__()
+        self.conv1 = nn.Conv2d(in_planes, planes, kernel_size=3, stride=stride, padding=1, bias=False)
+        self.bn1 = nn.BatchNorm2d(planes)
+        self.conv2 = nn.Conv2d(planes, planes, kernel_size=3, stride=1, padding=1, bias=False)
+        self.bn2 = nn.BatchNorm2d(planes)
 
-
-
-class ResBlock1dTF(nn.Module):
-    def __init__(self, dim, dilation=1, kernel_size=3):
-        super().__init__()
-        self.block_t = nn.Sequential(
-            nn.ReflectionPad1d(dilation * (kernel_size//2)),
-            nn.Conv1d(dim, dim, kernel_size=kernel_size, stride=1, bias=False, dilation=dilation, groups=dim),
-            nn.BatchNorm1d(dim),
-            nn.LeakyReLU(0.2, True)
-        )
-        self.block_f = nn.Sequential(
-                       nn.Conv1d(dim, dim, 1, 1, bias=False),
-                       nn.BatchNorm1d(dim),
-                       nn.LeakyReLU(0.2, True)
-        )
-        self.shortcut = nn.Conv1d(dim, dim, 1, 1)
-    def forward(self, x):
-        return self.shortcut(x) + self.block_f(x) + self.block_t(x)
-
-
-class TAggregate(nn.Module):
-    def __init__(self, clip_length=None, embed_dim=64, n_layers=6, nhead=6, n_classes=None, dim_feedforward=512):
-        super(TAggregate, self).__init__()
-        self.num_tokens = 1
-        drop_rate = 0.1
-        enc_layer = nn.TransformerEncoderLayer(d_model=embed_dim, nhead=nhead, activation="gelu", dim_feedforward=dim_feedforward, dropout=drop_rate)
-        self.transformer_enc = nn.TransformerEncoder(enc_layer, num_layers=n_layers, norm=nn.LayerNorm(embed_dim))
-        self.cls_token = nn.Parameter(torch.zeros(1, 1, embed_dim))
-        self.pos_embed = nn.Parameter(torch.zeros(1, clip_length + self.num_tokens, embed_dim))
-        self.fc = nn.Linear(embed_dim, n_classes)
-        self.apply(self._init_weights)
-
-    def _init_weights(self, m):
-        if isinstance(m, nn.Linear):
-            with torch.no_grad():
-                if isinstance(m, nn.Linear) and m.bias is not None:
-                    nn.init.constant_(m.bias, 0)
-                    # nn.init.constant_(m.weight, 1)
-        elif isinstance(m, nn.LayerNorm):
-            nn.init.constant_(m.bias, 0)
-            nn.init.constant_(m.weight, 1.0)
-        elif isinstance(m,  nn.Parameter):
-            with torch.no_grad():
-                m.weight.data.normal_(0.0, 0.02)
-                # nn.init.orthogonal_(m.weight)
+        self.shortcut = nn.Sequential()
+        if stride != 1 or in_planes != self.expansion*planes:
+            self.shortcut = nn.Sequential(
+                nn.Conv2d(in_planes, self.expansion*planes, kernel_size=1, stride=stride, bias=False),
+                nn.BatchNorm2d(self.expansion*planes)
+            )
 
     def forward(self, x):
-        x = x.permute(0, 2, 1).contiguous()
-        cls_tokens = self.cls_token.expand(x.shape[0], -1, -1)
-        x = torch.cat((cls_tokens, x), dim=1)
-        x += self.pos_embed
-        x.transpose_(1, 0)
-        o = self.transformer_enc(x)
-        pred = self.fc(o[0])
-        return pred
+        out = F.relu(self.bn1(self.conv1(x)))
+        out = self.bn2(self.conv2(out))
+        out += self.shortcut(x)
+        out = F.relu(out)
+        return out
 
+class AudioResNet(nn.Module):
+    def __init__(self, block, num_blocks, num_classes=4, num_mels=128):
+        super(AudioResNet, self).__init__()
+        self.in_planes = 64
 
-class AADownsample(nn.Module):
-    def __init__(self, filt_size=3, stride=2, channels=None):
-        super(AADownsample, self).__init__()
-        self.filt_size = filt_size
-        self.stride = stride
-        self.channels = channels
-        ha = torch.arange(1, filt_size//2+1+1, 1)
-        a = torch.cat((ha, ha.flip(dims=[-1,])[1:])).float()
-        a = a / a.sum()
-        filt = a[None, :]
-        self.register_buffer('filt', filt[None, :, :].repeat((self.channels, 1, 1)))
+        self.conv1 = nn.Conv2d(1, 64, kernel_size=3, stride=1, padding=1, bias=False)
+        self.bn1 = nn.BatchNorm2d(64)
+        self.layer1 = self._make_layer(block, 64, num_blocks[0], stride=1)
+        self.layer2 = self._make_layer(block, 128, num_blocks[1], stride=2)
+        self.layer3 = self._make_layer(block, 256, num_blocks[2], stride=2)
+        self.layer4 = self._make_layer(block, 512, num_blocks[3], stride=2)
+        self.adaptive_pool = nn.AdaptiveAvgPool2d((1, 1))
+        self.linear = nn.Linear(512 * block.expansion, num_classes)
 
-    def forward(self, x):
-        x_pad = F.pad(x, (self.filt_size//2, self.filt_size//2), "reflect")
-        y = F.conv1d(x_pad, self.filt, stride=self.stride, padding=0, groups=x.shape[1])
-        return y
-
-
-class Down(nn.Module):
-    def __init__(self, channels, d=2, k=3):
-        super().__init__()
-        kk = d + 1
-        self.down = nn.Sequential(
-            nn.ReflectionPad1d(kk // 2),
-            nn.Conv1d(channels, channels*2, kernel_size=kk, stride=1, bias=False),
-            nn.BatchNorm1d(channels*2),
-            nn.LeakyReLU(0.2, True),
-            AADownsample(channels=channels*2, stride=d, filt_size=k)
-        )
+    def _make_layer(self, block, planes, num_blocks, stride):
+        strides = [stride] + [1]*(num_blocks-1)
+        layers = []
+        for stride in strides:
+            layers.append(block(self.in_planes, planes, stride))
+            self.in_planes = planes * block.expansion
+        return nn.Sequential(*layers)
 
     def forward(self, x):
-        x = self.down(x)
-        return x
+        out = F.relu(self.bn1(self.conv1(x)))
+        out = self.layer1(out)
+        out = self.layer2(out)
+        out = self.layer3(out)
+        out = self.layer4(out)
+        out = self.adaptive_pool(out)
+        out = out.view(out.size(0), -1)
+        out = self.linear(out)
+        return out
 
-
-class SoundNetRaw(nn.Module):
-    def __init__(self, nf=32, clip_length=None, embed_dim=128, n_layers=4, nhead=8, factors=[4, 4, 4, 4], n_classes=None, dim_feedforward=512):
-        super().__init__()
-        model = [
-            nn.ReflectionPad1d(3),
-            nn.Conv1d(1, nf, kernel_size=7, stride=1, bias=False),
-            nn.BatchNorm1d(nf),
-            nn.LeakyReLU(0.2, True),
-        ]
-        self.start = nn.Sequential(*model)
-        model = []
-        for i, f in enumerate(factors):
-            model += [Down(channels=nf, d=f, k=f*2+1)]
-            nf *= 2
-            if i % 2 == 0:
-                model += [ResBlock1dTF(dim=nf, dilation=1, kernel_size=15)]
-        self.down = nn.Sequential(*model)
-
-        factors = [2, 2]
-        model = []
-        for _, f in enumerate(factors):
-            for i in range(1):
-                for j in range(3):
-                    model += [ResBlock1dTF(dim=nf, dilation=3 ** j, kernel_size=15)]
-            model += [Down(channels=nf, d=f, k=f*2+1)]
-            nf *= 2
-        self.down2 = nn.Sequential(*model)
-        self.project = nn.Conv1d(nf, embed_dim, 1)
-        self.clip_length = clip_length
-        self.tf = TAggregate(embed_dim=embed_dim, clip_length=clip_length, n_layers=n_layers, nhead=nhead, n_classes=n_classes, dim_feedforward=dim_feedforward)
-        self.apply(self._init_weights)
-
-    def _init_weights(self, m):
-        if isinstance(m, nn.Conv1d):
-            with torch.no_grad():
-                m.weight.data.normal_(0.0, 0.02)
-                if m.bias is not None:
-                    nn.init.constant_(m.bias, 0)
-
-        elif isinstance(m, nn.BatchNorm1d):
-            nn.init.constant_(m.bias, 0)
-            nn.init.constant_(m.weight, 1.0)
-
-    def forward(self, x):
-        x = self.start(x)
-        x = self.down(x)
-        x = self.down2(x)
-        x = self.project(x)
-        pred = self.tf(x)
-        return pred
-
-
-if __name__ == '__main__':
-    pass

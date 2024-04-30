@@ -6,8 +6,10 @@ import torch.nn as nn
 import os
 import pandas as pd
 from model import AudioResNet, BasicBlock
-
-
+from torch.optim.lr_scheduler import StepLR
+from dataset import initialize_data_loader
+from test import *
+from tqdm import tqdm
 
 def calculate_accuracy(model, data_loader, device):
     """Calculate the accuracy of a given model using a provided DataLoader."""
@@ -26,42 +28,27 @@ def calculate_accuracy(model, data_loader, device):
 def main():
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-    # Load and prepare training data
-    data_path = '/scratch/hy2611/ML_Competition/dataset/train_features.npz'
-    with np.load(data_path) as data:
-        features = data['data']
-        labels = data['labels']
-
-    # Splitting the dataset
-    train_features = features[:8000]
-    train_labels = labels[:8000]
-    val_features = features[8000:]
-    val_labels = labels[8000:]
-
-    # Convert to PyTorch tensors
-    train_features_tensor = torch.tensor(train_features, dtype=torch.float32).unsqueeze(1)
-    train_labels_tensor = torch.tensor(train_labels, dtype=torch.long)
-    val_features_tensor = torch.tensor(val_features, dtype=torch.float32).unsqueeze(1)
-    val_labels_tensor = torch.tensor(val_labels, dtype=torch.long)
-
-    # Creating TensorDatasets
-    train_dataset = TensorDataset(train_features_tensor, train_labels_tensor)
-    val_dataset = TensorDataset(val_features_tensor, val_labels_tensor)
-
-    # Creating DataLoaders
-    train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
-    val_loader = DataLoader(val_dataset, batch_size=64, shuffle=False)
+    # Setup the path and batch size for data loaders
+    dataset_dir = '/scratch/hy2611/ML_Competition/dataset'
+    tar_paths = [('/scratch/hy2611/ML_Competition/dataset/train_mp3s.tar', 'train_mp3s')]
+    batch_size = 64
+    
+    # Initialize DataLoaders for training and validation using a split or separate data
+    train_loader, val_loader, test_loader= initialize_data_loader(dataset_dir, tar_paths, batch_size=batch_size)
 
     # Define model, loss function, and optimizer
     model = AudioResNet(BasicBlock, [2, 2, 2, 2], num_classes=4, num_mels=128).to(device)
-    criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(model.parameters(), lr=2*10**(-5))
+    #model = AudioResNet(BasicBlock, [3, 4, 6, 3], num_classes=4, num_mels=128).to(device)
+    criterion = nn.CrossEntropyLoss(label_smoothing=0.1)
+    optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
+    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=100, eta_min=0.0001)
     model.to(device)
 
     # Training loop
     num_epochs = 100
     for epoch in range(num_epochs):
         model.train()
+        scheduler.step()
         for inputs, labels in train_loader:
             inputs, labels = inputs.to(device), labels.to(device)
             optimizer.zero_grad()
@@ -78,8 +65,11 @@ def main():
     torch.save(model.state_dict(), '/scratch/hy2611/ML_Competition/model_state_dict.pth')
     print("Model state dictionary saved.")
 
-    # Predictions for submission (optionally)
-    # Add prediction and submission code if needed
+    # Generate predictions for the test set
+    predictions = predict(model, device, test_loader)
+    save_predictions_to_csv(predictions, '/scratch/hy2611/ML_Competition/test_predictions.csv')
+    print("Test predictions saved as CSV.")
+
 
 if __name__ == "__main__":
     main()

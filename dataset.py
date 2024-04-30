@@ -29,13 +29,29 @@ def load_and_convert_to_melspectrogram(file_path):
 
 def process_audio_files(audio_path, label_file_path, output_path):
     features = []
+    # Load labels
     with open(label_file_path, 'r') as f:
         labels = [int(line.strip()) for line in f.readlines()]
-    for filename in os.listdir(audio_path):
-        if filename.endswith(".mp3") and not filename.startswith("._"):
-            file_path = os.path.join(audio_path, filename)
+    
+    # List all mp3 files, sort them to ensure order, and process
+    filenames = [f for f in os.listdir(audio_path) if f.endswith(".mp3") and not f.startswith("._")]
+    filenames.sort(key=lambda x: int(x.split('.')[0]))  # Sorting by numerical order assuming filename like '0.mp3', '1.mp3', etc.
+    
+    for filename in filenames:
+        file_path = os.path.join(audio_path, filename)
+        index = int(filename.split('.')[0])  # Get index from filename '0.mp3' -> 0
+        if index < len(labels):  # Ensure we do not go out of bounds
             features.append(load_and_convert_to_melspectrogram(file_path))
+        else:
+            print(f"Skipping {filename} as it exceeds label file count.")
+    
+    # Ensure data and labels have the same length
+    min_length = min(len(features), len(labels))
+    features = features[:min_length]
+    labels = labels[:min_length]
+
     np.savez(output_path, data=np.array(features), labels=np.array(labels))
+
 
 def create_data_loader(data_path, batch_size=64):
     with np.load(data_path) as loaded_data:
@@ -46,109 +62,69 @@ def create_data_loader(data_path, batch_size=64):
     dataset = TensorDataset(data_tensor, labels_tensor)
     return DataLoader(dataset, batch_size=batch_size, shuffle=True)
 
-def initialize_data_loader(dataset_dir, tar_paths, batch_size=64):
+def initialize_data_loader(dataset_dir, tar_paths, batch_size=64, split_ratio=0.8):
+    train_loader = None
+    val_loader = None
+    test_loader = None
+
+    # Process training and validation data
     for tar_path, subdir in tar_paths:
         extract_tar_files(tar_path, dataset_dir)
         data_path = os.path.join(dataset_dir, subdir + '_features.npz')
+
         if not os.path.exists(data_path):
             audio_path = os.path.join(dataset_dir, subdir)
-            label_file = os.path.join(dataset_dir, subdir + '_label.txt')
+            label_file = os.path.join(dataset_dir, 'train_label.txt')  # General label file path
             process_audio_files(audio_path, label_file, data_path)
-    return create_data_loader(data_path, batch_size)
+
+        if os.path.exists(data_path):
+            with np.load(data_path) as data:
+                features = data['data']
+                labels = data['labels']
+
+            # Split the dataset
+            split_index = int(len(features) * split_ratio)
+            train_features = features[:split_index]
+            train_labels = labels[:split_index]
+            val_features = features[split_index:]
+            val_labels = labels[split_index:]
+
+            # Convert to PyTorch tensors
+            train_features_tensor = torch.tensor(train_features, dtype=torch.float32).unsqueeze(1)
+            train_labels_tensor = torch.tensor(train_labels, dtype=torch.long)
+            val_features_tensor = torch.tensor(val_features, dtype=torch.float32).unsqueeze(1)
+            val_labels_tensor = torch.tensor(val_labels, dtype=torch.long)
+
+            # Creating TensorDatasets
+            train_dataset = TensorDataset(train_features_tensor, train_labels_tensor)
+            val_dataset = TensorDataset(val_features_tensor, val_labels_tensor)
+
+            # Creating DataLoaders
+            train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+            val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
+
+    # Process test data
+    test_tar_path = '/scratch/hy2611/ML_Competition/dataset/test_mp3s.tar'
+    test_subdir = 'test_mp3s'
+    extract_tar_files(test_tar_path, dataset_dir)
+    test_audio_path = os.path.join(dataset_dir, test_subdir)
+    test_data_path = os.path.join(dataset_dir, test_subdir + '_features.npz')
+
+    if not os.path.exists(test_data_path):
+        process_audio_files(test_audio_path, None, test_data_path)  # No labels for test data
+
+    if os.path.exists(test_data_path):
+        with np.load(test_data_path) as data:
+            test_features = data['data']
+
+        # Convert to PyTorch tensors
+        test_features_tensor = torch.tensor(test_features, dtype=torch.float32).unsqueeze(1)
+
+        # Creating TensorDataset and DataLoader for test data
+        test_dataset = TensorDataset(test_features_tensor)
+        test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
+
+    return train_loader, val_loader, test_loader
 
 
 
-# import os
-# import numpy as np
-# import torch
-# from torch.utils.data import DataLoader, TensorDataset
-# from pydub import AudioSegment
-# import librosa
-
-# # Constants for audio processing
-# SAMPLE_RATE = 22050  # Sample rate
-# DURATION = 3  # Duration of audio clips in seconds
-# SAMPLES_PER_TRACK = SAMPLE_RATE * DURATION
-# N_FFT = 2048  # FFT window size
-# HOP_LENGTH = 512  # Number of samples between successive frames
-# N_MELS = 128  # Number of Mel bands to generate
-
-# # Path settings
-# AUDIO_PATH = '/scratch/hy2611/ML_Competition/dataset/train_mp3s'  # Path where MP3s are stored
-# TEST_PATH = '/scratch/hy2611/ML_Competition/dataset/test_mp3s'  # Path where test MP3s are stored
-# WAV_PATH = '/scratch/hy2611/ML_Competition/dataset/wav'  # Path where WAVs should be saved
-# TEST_WAV_PATH = '/scratch/hy2611/ML_Competition/dataset/test_wav'  # Path where test WAVs should be saved
-# FEATURES = '/scratch/hy2611/ML_Competition/dataset/features'  # Path where features should be saved
-# LABEL_FILE = '/scratch/hy2611/ML_Competition/dataset/train_label.txt'  # File containing all audio labels
-
-# def ensure_dir(directory):
-#     """Ensure that a directory exists, and if not, create it."""
-#     if not os.path.exists(directory):
-#         os.makedirs(directory)
-
-# def convert_mp3_to_wav(mp3_file, output_dir):
-#     """Convert an MP3 file to a WAV file with adjusted sample rate and single channel, avoiding duplication."""
-#     ensure_dir(output_dir)
-#     base_filename = os.path.splitext(os.path.basename(mp3_file))[0] + '.wav'
-#     wav_file = os.path.join(output_dir, base_filename)
-#     if not os.path.exists(wav_file):
-#         audio = AudioSegment.from_mp3(mp3_file)
-#         audio = audio.set_frame_rate(SAMPLE_RATE)
-#         audio = audio.set_channels(1)
-#         audio.export(wav_file, format='wav')
-#     return wav_file
-
-# def save_features(features, file_path):
-#     np.save(file_path, features)
-
-# def load_features(file_path):
-#     return np.load(file_path)
-
-# def load_and_convert_to_melspectrogram(file_path):
-#     y, sr = librosa.load(file_path, sr=SAMPLE_RATE, duration=DURATION)
-#     y = librosa.util.fix_length(y, size=SAMPLES_PER_TRACK)
-#     S = librosa.feature.melspectrogram(y=y, sr=sr, n_fft=N_FFT, hop_length=HOP_LENGTH, n_mels=N_MELS)
-#     S_DB = librosa.power_to_db(S, ref=np.max)
-#     return S_DB
-
-# def load_and_process(file_path, output_dir, feature_dir):
-#     wav_path = convert_mp3_to_wav(file_path, output_dir)
-#     feature_path = os.path.join(feature_dir, os.path.splitext(os.path.basename(file_path))[0] + '.npy')
-#     if os.path.exists(feature_path):
-#         return load_features(feature_path)
-#     else:
-#         S_DB = load_and_convert_to_melspectrogram(wav_path)
-#         save_features(S_DB, feature_path)
-#         return S_DB
-
-# def get_dataset(data_dir, batch_size=32, val_split=0.2):
-#     ensure_dir(FEATURES)
-#     label_file = os.path.join(data_dir, 'train_label.txt')
-#     audio_path = os.path.join(data_dir, 'train_mp3s')
-#     test_path = os.path.join(data_dir, 'test_mp3s')
-
-#     labels = np.loadtxt(label_file).astype(int)
-#     train_data = [load_and_process(os.path.join(audio_path, f'{i}.mp3'), WAV_PATH, FEATURES) for i in range(len(labels))]
-#     train_data = np.array(train_data)
-
-#     val_size = int(len(train_data) * val_split)
-#     train_features, val_features = train_data[val_size:], train_data[:val_size]
-#     train_labels, val_labels = labels[val_size:], labels[:val_size]
-
-#     train_dataset = TensorDataset(torch.tensor(train_features), torch.tensor(train_labels))
-#     val_dataset = TensorDataset(torch.tensor(val_features), torch.tensor(val_labels))
-
-#     test_files = sorted(os.listdir(test_path))
-#     test_data = [load_and_process(os.path.join(test_path, file), TEST_WAV_PATH, FEATURES) for file in test_files]
-#     test_data = np.array(test_data)
-
-#     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
-#     val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
-#     test_loader = DataLoader(TensorDataset(torch.tensor(test_data)), batch_size=batch_size, shuffle=False)
-
-#     return train_loader, val_loader, test_loader
-
-# if __name__ == "__main__":
-#     data_dir = '/scratch/hy2611/ML_Competition/dataset'
-#     train_loader, val_loader, test_loader = get_dataset(data_dir)
-#     print("Data loaders are ready.")

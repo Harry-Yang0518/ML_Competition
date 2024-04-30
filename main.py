@@ -10,6 +10,7 @@ from torch.optim.lr_scheduler import StepLR
 from dataset import initialize_data_loader
 from test import *
 from tqdm import tqdm
+from utils import AudioAugs
 
 def calculate_accuracy(model, data_loader, device):
     """Calculate the accuracy of a given model using a provided DataLoader."""
@@ -33,23 +34,27 @@ def main():
     tar_paths = [('/scratch/hy2611/ML_Competition/dataset/train_mp3s.tar', 'train_mp3s')]
     batch_size = 64
     
+    audio_augs = AudioAugs(['sine','white_noise'], fs=22050)
+
     # Initialize DataLoaders for training and validation using a split or separate data
-    train_loader, val_loader, test_loader= initialize_data_loader(dataset_dir, tar_paths, batch_size=batch_size)
+
+    train_loader, val_loader, test_loader = initialize_data_loader(dataset_dir, tar_paths, batch_size=64, split_ratio=0.8, augmentations=audio_augs)
 
     # Define model, loss function, and optimizer
     model = AudioResNet(BasicBlock, [2, 2, 2, 2], num_classes=4, num_mels=128).to(device)
     #model = AudioResNet(BasicBlock, [3, 4, 6, 3], num_classes=4, num_mels=128).to(device)
     criterion = nn.CrossEntropyLoss(label_smoothing=0.1)
-    optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
+    optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=100, eta_min=0.0001)
     model.to(device)
 
     # Training loop
-    num_epochs = 100
+    num_epochs = 200
     for epoch in range(num_epochs):
         model.train()
         scheduler.step()
         for inputs, labels in train_loader:
+            #breakpoint()
             inputs, labels = inputs.to(device), labels.to(device)
             optimizer.zero_grad()
             outputs = model(inputs)

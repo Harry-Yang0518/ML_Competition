@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #SBATCH --job-name=ml_competition
-#SBATCH --output=resnet18_output_%j.out
-#SBATCH --error=resnet18_error_%j.out
+#SBATCH --output=aug_resnet18_output_%j.out
+#SBATCH --error=aug_resnet18_error_%j.out
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=2

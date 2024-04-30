@@ -3,7 +3,9 @@ import tarfile
 import torch
 import torchaudio
 import numpy as np
-from torch.utils.data import DataLoader, TensorDataset
+from utils import AudioAugs
+import random
+from torch.utils.data import DataLoader, TensorDataset, Dataset
 
 # Audio processing parameters
 sample_rate = 22050
@@ -12,6 +14,32 @@ samples_per_track = sample_rate * duration
 n_mels = 128
 n_fft = 2048
 hop_length = 512
+
+
+import torch
+from torch.utils.data import Dataset, DataLoader
+import numpy as np
+import random
+
+class CustomAudioDataset(Dataset):
+    def __init__(self, features, labels=None, transform=None):
+        self.features = features
+        self.labels = labels
+        self.transform = transform
+
+    def __len__(self):
+        return len(self.features)
+
+    def __getitem__(self, idx):
+        feature = self.features[idx]
+        if self.transform:
+            feature = self.transform(feature)
+        
+        if self.labels is not None:
+            label = self.labels[idx]
+            return feature, label
+        return feature
+
 
 def extract_tar_files(tar_path, extract_to):
     with tarfile.open(tar_path, 'r') as file:
@@ -62,7 +90,7 @@ def create_data_loader(data_path, batch_size=64):
     dataset = TensorDataset(data_tensor, labels_tensor)
     return DataLoader(dataset, batch_size=batch_size, shuffle=True)
 
-def initialize_data_loader(dataset_dir, tar_paths, batch_size=64, split_ratio=0.8):
+def initialize_data_loader(dataset_dir, tar_paths, batch_size=64, split_ratio=0.8, augmentations=None):
     train_loader = None
     val_loader = None
     test_loader = None
@@ -82,6 +110,9 @@ def initialize_data_loader(dataset_dir, tar_paths, batch_size=64, split_ratio=0.
                 features = data['data']
                 labels = data['labels']
 
+
+
+
             # Split the dataset
             split_index = int(len(features) * split_ratio)
             train_features = features[:split_index]
@@ -96,7 +127,7 @@ def initialize_data_loader(dataset_dir, tar_paths, batch_size=64, split_ratio=0.
             val_labels_tensor = torch.tensor(val_labels, dtype=torch.long)
 
             # Creating TensorDatasets
-            train_dataset = TensorDataset(train_features_tensor, train_labels_tensor)
+            train_dataset = CustomAudioDataset(train_features_tensor, train_labels_tensor, transform=augmentations)
             val_dataset = TensorDataset(val_features_tensor, val_labels_tensor)
 
             # Creating DataLoaders

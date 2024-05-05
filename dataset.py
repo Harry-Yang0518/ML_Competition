@@ -12,7 +12,7 @@ sample_rate = 22050
 duration = 3
 samples_per_track = sample_rate * duration
 n_mels = 128
-n_fft = 2048
+n_fft = 128
 hop_length = 512
 
 

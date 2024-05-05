@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/scratch/hy2611/ML_Competition/main.py", line 109, in <module>
+    main()
+  File "/scratch/hy2611/ML_Competition/main.py", line 38, in main
+    main_worker(wandb.config)
+NameError: name 'main_worker' is not defined

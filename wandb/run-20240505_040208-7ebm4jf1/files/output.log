@@ -1,0 +1,38 @@
+
+Extracted contents to /scratch/hy2611/ML_Competition/dataset
+Extracted contents to /scratch/hy2611/ML_Competition/dataset
+Sample too short for pitch shifting, applying no change.
+Sample too short for pitch shifting, applying no change.
+Sample too short for pitch shifting, applying no change.
+Sample too short for pitch shifting, applying no change.
+Sample too short for pitch shifting, applying no change.
+Sample too short for pitch shifting, applying no change.
+Sample too short for pitch shifting, applying no change.
+Sample too short for pitch shifting, applying no change.
+Sample too short for pitch shifting, applying no change.
+Sample too short for pitch shifting, applying no change.
+Sample too short for pitch shifting, applying no change.
+Sample too short for pitch shifting, applying no change.
+Sample too short for pitch shifting, applying no change.
+Traceback (most recent call last):
+  File "/scratch/hy2611/ML_Competition/main.py", line 107, in <module>
+    main()
+  File "/scratch/hy2611/ML_Competition/main.py", line 78, in main
+    for inputs, labels in train_loader:
+  File "/ext3/miniconda3/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 633, in __next__
+    data = self._next_data()
+  File "/ext3/miniconda3/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 677, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "/ext3/miniconda3/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py", line 54, in fetch
+    return self.collate_fn(data)
+  File "/ext3/miniconda3/lib/python3.10/site-packages/torch/utils/data/_utils/collate.py", line 265, in default_collate
+    return collate(batch, collate_fn_map=default_collate_fn_map)
+  File "/ext3/miniconda3/lib/python3.10/site-packages/torch/utils/data/_utils/collate.py", line 142, in collate
+    return [collate(samples, collate_fn_map=collate_fn_map) for samples in transposed]  # Backwards compatibility.
+  File "/ext3/miniconda3/lib/python3.10/site-packages/torch/utils/data/_utils/collate.py", line 142, in <listcomp>
+    return [collate(samples, collate_fn_map=collate_fn_map) for samples in transposed]  # Backwards compatibility.
+  File "/ext3/miniconda3/lib/python3.10/site-packages/torch/utils/data/_utils/collate.py", line 119, in collate
+    return collate_fn_map[elem_type](batch, collate_fn_map=collate_fn_map)
+  File "/ext3/miniconda3/lib/python3.10/site-packages/torch/utils/data/_utils/collate.py", line 162, in collate_tensor_fn
+    return torch.stack(batch, 0, out=out)
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cpu and cuda:0! (when checking argument for argument tensors in method wrapper_CUDA_cat)

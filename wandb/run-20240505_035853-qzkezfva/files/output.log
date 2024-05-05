@@ -1,0 +1,21 @@
+
+Extracted contents to /scratch/hy2611/ML_Competition/dataset
+Extracted contents to /scratch/hy2611/ML_Competition/dataset
+Traceback (most recent call last):
+  File "/scratch/hy2611/ML_Competition/main.py", line 107, in <module>
+    main()
+  File "/scratch/hy2611/ML_Competition/main.py", line 78, in main
+    for inputs, labels in train_loader:
+  File "/ext3/miniconda3/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 633, in __next__
+    data = self._next_data()
+  File "/ext3/miniconda3/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 677, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "/ext3/miniconda3/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py", line 51, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/ext3/miniconda3/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py", line 51, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/scratch/hy2611/ML_Competition/dataset.py", line 36, in __getitem__
+    feature = self.transform(feature)
+  File "/scratch/hy2611/ML_Competition/utils.py", line 30, in __call__
+    return self.transformations[aug_choice](sample)
+TypeError: AudioAugs.low_pass_filter() missing 1 required positional argument: 'fs'

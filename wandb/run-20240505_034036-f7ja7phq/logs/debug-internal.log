@@ -1,0 +1,306 @@
+2024-05-05 03:40:36,297 INFO    StreamThr :3794161 [internal.py:wandb_internal():86] W&B internal server running at pid: 3794161, started at: 2024-05-05 03:40:36.294851
+2024-05-05 03:40:36,301 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status
+2024-05-05 03:40:36,302 INFO    WriterThread:3794161 [datastore.py:open_for_write():85] open: /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/run-f7ja7phq.wandb
+2024-05-05 03:40:36,302 DEBUG   SenderThread:3794161 [sender.py:send():380] send: header
+2024-05-05 03:40:36,303 DEBUG   SenderThread:3794161 [sender.py:send():380] send: run
+2024-05-05 03:40:41,302 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: keepalive
+2024-05-05 03:40:41,520 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: check_version
+2024-05-05 03:40:41,521 INFO    SenderThread:3794161 [dir_watcher.py:__init__():211] watching files in: /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files
+2024-05-05 03:40:41,521 INFO    SenderThread:3794161 [sender.py:_start_run_threads():1124] run started: f7ja7phq with start time 1714894836.292416
+2024-05-05 03:40:41,521 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: check_version
+2024-05-05 03:40:41,522 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:40:41,592 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: run_start
+2024-05-05 03:40:41,619 DEBUG   HandlerThread:3794161 [system_info.py:__init__():32] System info init
+2024-05-05 03:40:41,619 DEBUG   HandlerThread:3794161 [system_info.py:__init__():47] System info init done
+2024-05-05 03:40:41,619 INFO    HandlerThread:3794161 [system_monitor.py:start():194] Starting system monitor
+2024-05-05 03:40:41,619 INFO    SystemMonitor:3794161 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-05-05 03:40:41,620 INFO    HandlerThread:3794161 [system_monitor.py:probe():214] Collecting system info
+2024-05-05 03:40:41,628 INFO    SystemMonitor:3794161 [interfaces.py:start():190] Started cpu monitoring
+2024-05-05 03:40:41,629 INFO    SystemMonitor:3794161 [interfaces.py:start():190] Started disk monitoring
+2024-05-05 03:40:41,633 DEBUG   HandlerThread:3794161 [system_info.py:probe():196] Probing system
+2024-05-05 03:40:41,639 INFO    SystemMonitor:3794161 [interfaces.py:start():190] Started gpu monitoring
+2024-05-05 03:40:41,646 INFO    SystemMonitor:3794161 [interfaces.py:start():190] Started memory monitoring
+2024-05-05 03:40:41,647 DEBUG   HandlerThread:3794161 [system_info.py:_probe_git():181] Probing git
+2024-05-05 03:40:41,649 INFO    SystemMonitor:3794161 [interfaces.py:start():190] Started network monitoring
+2024-05-05 03:40:41,655 DEBUG   HandlerThread:3794161 [system_info.py:_probe_git():189] Probing git done
+2024-05-05 03:40:41,655 DEBUG   HandlerThread:3794161 [system_info.py:probe():244] Probing system done
+2024-05-05 03:40:41,655 DEBUG   HandlerThread:3794161 [system_monitor.py:probe():223] {'os': 'Linux-5.14.0-284.40.1.el9_2.x86_64-x86_64-with-glibc2.31', 'python': '3.10.10', 'heartbeatAt': '2024-05-05T07:40:41.633781', 'startedAt': '2024-05-05T07:40:36.283116', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '/scratch/hy2611/ML_Competition/main.py', 'codePathLocal': 'main.py', 'codePath': 'main.py', 'git': {'remote': 'https://github.com/Harry-Yang0518/ML_Competition.git', 'commit': '9eac0f3adffeece4b49bd40b169c981b8a822c9d'}, 'email': 'hy2611@nyu.edu', 'root': '/scratch/hy2611/ML_Competition', 'host': 'gv002.hpc.nyu.edu', 'username': 'hy2611', 'executable': '/ext3/miniconda3/bin/python', 'cpu_count': 48, 'cpu_count_logical': 48, 'cpu_freq': {'current': 3046.7434166666667, 'min': 0.0, 'max': 0.0}, 'cpu_freq_per_core': [{'current': 3600.0, 'min': 0.0, 'max': 0.0}, {'current': 3599.999, 'min': 0.0, 'max': 0.0}, {'current': 3600.0, 'min': 0.0, 'max': 0.0}, {'current': 3599.999, 'min': 0.0, 'max': 0.0}, {'current': 3599.999, 'min': 0.0, 'max': 0.0}, {'current': 3600.0, 'min': 0.0, 'max': 0.0}, {'current': 3600.0, 'min': 0.0, 'max': 0.0}, {'current': 3599.999, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 1543.689, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 3600.0, 'min': 0.0, 'max': 0.0}, {'current': 3600.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 3600.0, 'min': 0.0, 'max': 0.0}, {'current': 2900.0, 'min': 0.0, 'max': 0.0}, {'current': 3599.999, 'min': 0.0, 'max': 0.0}], 'disk': {'/': {'total': 25.93466567993164, 'used': 7.7373809814453125}}, 'gpu': 'Tesla V100-PCIE-32GB', 'gpu_count': 1, 'gpu_devices': [{'name': 'Tesla V100-PCIE-32GB', 'memory_total': 34359738368}], 'memory': {'total': 377.063045501709}}
+2024-05-05 03:40:41,659 INFO    HandlerThread:3794161 [system_monitor.py:probe():224] Finished collecting system info
+2024-05-05 03:40:41,659 INFO    HandlerThread:3794161 [system_monitor.py:probe():227] Publishing system info
+2024-05-05 03:40:41,659 DEBUG   HandlerThread:3794161 [system_info.py:_save_pip():52] Saving list of pip packages installed into the current environment
+2024-05-05 03:40:41,661 DEBUG   HandlerThread:3794161 [system_info.py:_save_pip():68] Saving pip packages done
+2024-05-05 03:40:41,661 DEBUG   HandlerThread:3794161 [system_info.py:_save_conda():75] Saving list of conda packages installed into the current environment
+2024-05-05 03:40:42,522 INFO    Thread-12 :3794161 [dir_watcher.py:_on_file_created():271] file/dir created: /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/conda-environment.yaml
+2024-05-05 03:40:42,523 INFO    Thread-12 :3794161 [dir_watcher.py:_on_file_created():271] file/dir created: /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/requirements.txt
+2024-05-05 03:40:46,299 DEBUG   HandlerThread:3794161 [system_info.py:_save_conda():87] Saving conda packages done
+2024-05-05 03:40:46,301 INFO    HandlerThread:3794161 [system_monitor.py:probe():229] Finished publishing system info
+2024-05-05 03:40:46,305 DEBUG   SenderThread:3794161 [sender.py:send():380] send: files
+2024-05-05 03:40:46,305 INFO    SenderThread:3794161 [sender.py:_save_file():1380] saving file wandb-metadata.json with policy now
+2024-05-05 03:40:46,309 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: stop_status
+2024-05-05 03:40:46,310 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: stop_status
+2024-05-05 03:40:46,352 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: internal_messages
+2024-05-05 03:40:46,395 DEBUG   SenderThread:3794161 [sender.py:send():380] send: telemetry
+2024-05-05 03:40:46,523 INFO    Thread-12 :3794161 [dir_watcher.py:_on_file_modified():288] file/dir modified: /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/conda-environment.yaml
+2024-05-05 03:40:46,523 INFO    Thread-12 :3794161 [dir_watcher.py:_on_file_created():271] file/dir created: /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/wandb-metadata.json
+2024-05-05 03:40:46,586 INFO    wandb-upload_0:3794161 [upload_job.py:push():131] Uploaded file /state/partition1/job-46080032/tmp3sluy76twandb/a243lgy1-wandb-metadata.json
+2024-05-05 03:40:47,395 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:40:52,396 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:40:57,397 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:41:01,310 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: stop_status
+2024-05-05 03:41:01,310 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: stop_status
+2024-05-05 03:41:01,351 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: internal_messages
+2024-05-05 03:41:03,387 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:41:08,393 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:41:08,530 INFO    Thread-12 :3794161 [dir_watcher.py:_on_file_modified():288] file/dir modified: /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/config.yaml
+2024-05-05 03:41:13,494 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:41:16,310 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: stop_status
+2024-05-05 03:41:16,311 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: stop_status
+2024-05-05 03:41:16,351 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: internal_messages
+2024-05-05 03:41:17,533 INFO    Thread-12 :3794161 [dir_watcher.py:_on_file_created():271] file/dir created: /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/output.log
+2024-05-05 03:41:19,291 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:41:19,534 INFO    Thread-12 :3794161 [dir_watcher.py:_on_file_modified():288] file/dir modified: /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/output.log
+2024-05-05 03:41:24,292 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:41:29,537 INFO    Thread-12 :3794161 [dir_watcher.py:_on_file_modified():288] file/dir modified: /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/output.log
+2024-05-05 03:41:29,804 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:41:31,310 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: stop_status
+2024-05-05 03:41:31,310 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: stop_status
+2024-05-05 03:41:31,314 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: internal_messages
+2024-05-05 03:41:35,361 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:41:40,361 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:41:41,649 DEBUG   SystemMonitor:3794161 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2024-05-05 03:41:41,650 DEBUG   SenderThread:3794161 [sender.py:send():380] send: stats
+2024-05-05 03:41:45,651 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:41:46,310 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: stop_status
+2024-05-05 03:41:46,311 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: stop_status
+2024-05-05 03:41:46,351 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: internal_messages
+2024-05-05 03:41:51,449 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:41:56,450 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:42:01,310 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: stop_status
+2024-05-05 03:42:01,311 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: stop_status
+2024-05-05 03:42:01,351 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: internal_messages
+2024-05-05 03:42:02,378 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:42:07,378 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:42:08,162 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: partial_history
+2024-05-05 03:42:08,163 DEBUG   SenderThread:3794161 [sender.py:send():380] send: history
+2024-05-05 03:42:08,163 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: summary_record
+2024-05-05 03:42:08,166 INFO    SenderThread:3794161 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2024-05-05 03:42:08,549 INFO    Thread-12 :3794161 [dir_watcher.py:_on_file_created():271] file/dir created: /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/wandb-summary.json
+2024-05-05 03:42:11,599 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: partial_history
+2024-05-05 03:42:11,600 DEBUG   SenderThread:3794161 [sender.py:send():380] send: history
+2024-05-05 03:42:11,600 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: summary_record
+2024-05-05 03:42:11,601 INFO    SenderThread:3794161 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2024-05-05 03:42:11,651 DEBUG   SenderThread:3794161 [sender.py:send():380] send: stats
+2024-05-05 03:42:12,551 INFO    Thread-12 :3794161 [dir_watcher.py:_on_file_modified():288] file/dir modified: /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/wandb-summary.json
+2024-05-05 03:42:12,652 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:42:13,551 INFO    Thread-12 :3794161 [dir_watcher.py:_on_file_modified():288] file/dir modified: /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/output.log
+2024-05-05 03:42:16,310 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: stop_status
+2024-05-05 03:42:16,311 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: stop_status
+2024-05-05 03:42:16,314 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: internal_messages
+2024-05-05 03:42:17,701 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:42:22,702 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:42:27,702 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:42:31,310 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: stop_status
+2024-05-05 03:42:31,311 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: stop_status
+2024-05-05 03:42:31,351 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: internal_messages
+2024-05-05 03:42:33,420 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:42:38,420 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:42:41,652 DEBUG   SenderThread:3794161 [sender.py:send():380] send: stats
+2024-05-05 03:42:43,652 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:42:46,311 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: stop_status
+2024-05-05 03:42:46,311 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: stop_status
+2024-05-05 03:42:46,351 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: internal_messages
+2024-05-05 03:42:48,674 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:42:50,794 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: partial_history
+2024-05-05 03:42:50,794 DEBUG   SenderThread:3794161 [sender.py:send():380] send: history
+2024-05-05 03:42:50,794 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: summary_record
+2024-05-05 03:42:50,795 INFO    SenderThread:3794161 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2024-05-05 03:42:51,567 INFO    Thread-12 :3794161 [dir_watcher.py:_on_file_modified():288] file/dir modified: /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/wandb-summary.json
+2024-05-05 03:42:53,795 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:42:54,156 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: partial_history
+2024-05-05 03:42:54,157 DEBUG   SenderThread:3794161 [sender.py:send():380] send: history
+2024-05-05 03:42:54,157 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: summary_record
+2024-05-05 03:42:54,158 INFO    SenderThread:3794161 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2024-05-05 03:42:54,568 INFO    Thread-12 :3794161 [dir_watcher.py:_on_file_modified():288] file/dir modified: /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/wandb-summary.json
+2024-05-05 03:42:55,568 INFO    Thread-12 :3794161 [dir_watcher.py:_on_file_modified():288] file/dir modified: /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/output.log
+2024-05-05 03:42:59,159 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:43:01,311 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: stop_status
+2024-05-05 03:43:01,311 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: stop_status
+2024-05-05 03:43:01,314 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: internal_messages
+2024-05-05 03:43:04,363 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:43:09,364 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:43:11,652 DEBUG   SenderThread:3794161 [sender.py:send():380] send: stats
+2024-05-05 03:43:14,653 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:43:16,311 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: stop_status
+2024-05-05 03:43:16,311 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: stop_status
+2024-05-05 03:43:16,352 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: internal_messages
+2024-05-05 03:43:20,443 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:43:25,444 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:43:30,444 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:43:31,311 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: stop_status
+2024-05-05 03:43:31,311 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: stop_status
+2024-05-05 03:43:31,352 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: internal_messages
+2024-05-05 03:43:33,350 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: partial_history
+2024-05-05 03:43:33,351 DEBUG   SenderThread:3794161 [sender.py:send():380] send: history
+2024-05-05 03:43:33,351 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: summary_record
+2024-05-05 03:43:33,352 INFO    SenderThread:3794161 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2024-05-05 03:43:33,582 INFO    Thread-12 :3794161 [dir_watcher.py:_on_file_modified():288] file/dir modified: /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/wandb-summary.json
+2024-05-05 03:43:36,353 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:43:36,680 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: partial_history
+2024-05-05 03:43:36,680 DEBUG   SenderThread:3794161 [sender.py:send():380] send: history
+2024-05-05 03:43:36,680 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: summary_record
+2024-05-05 03:43:36,681 INFO    SenderThread:3794161 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2024-05-05 03:43:37,583 INFO    Thread-12 :3794161 [dir_watcher.py:_on_file_modified():288] file/dir modified: /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/wandb-summary.json
+2024-05-05 03:43:37,584 INFO    Thread-12 :3794161 [dir_watcher.py:_on_file_modified():288] file/dir modified: /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/output.log
+2024-05-05 03:43:41,653 DEBUG   SenderThread:3794161 [sender.py:send():380] send: stats
+2024-05-05 03:43:41,654 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:43:46,311 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: stop_status
+2024-05-05 03:43:46,311 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: stop_status
+2024-05-05 03:43:46,315 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: internal_messages
+2024-05-05 03:43:47,418 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:43:48,632 DEBUG   SenderThread:3794161 [sender.py:send():380] send: exit
+2024-05-05 03:43:48,632 INFO    SenderThread:3794161 [sender.py:send_exit():585] handling exit code: 255
+2024-05-05 03:43:48,632 INFO    SenderThread:3794161 [sender.py:send_exit():587] handling runtime: 187
+2024-05-05 03:43:48,635 INFO    SenderThread:3794161 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2024-05-05 03:43:48,636 INFO    SenderThread:3794161 [sender.py:send_exit():593] send defer
+2024-05-05 03:43:48,636 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: defer
+2024-05-05 03:43:48,636 INFO    HandlerThread:3794161 [handler.py:handle_request_defer():172] handle defer: 0
+2024-05-05 03:43:48,636 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: defer
+2024-05-05 03:43:48,636 INFO    SenderThread:3794161 [sender.py:send_request_defer():609] handle sender defer: 0
+2024-05-05 03:43:48,637 INFO    SenderThread:3794161 [sender.py:transition_state():613] send defer: 1
+2024-05-05 03:43:48,637 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: defer
+2024-05-05 03:43:48,637 INFO    HandlerThread:3794161 [handler.py:handle_request_defer():172] handle defer: 1
+2024-05-05 03:43:48,637 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: defer
+2024-05-05 03:43:48,637 INFO    SenderThread:3794161 [sender.py:send_request_defer():609] handle sender defer: 1
+2024-05-05 03:43:48,637 INFO    SenderThread:3794161 [sender.py:transition_state():613] send defer: 2
+2024-05-05 03:43:48,637 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: defer
+2024-05-05 03:43:48,637 INFO    HandlerThread:3794161 [handler.py:handle_request_defer():172] handle defer: 2
+2024-05-05 03:43:48,637 INFO    HandlerThread:3794161 [system_monitor.py:finish():203] Stopping system monitor
+2024-05-05 03:43:48,637 DEBUG   SystemMonitor:3794161 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2024-05-05 03:43:48,637 DEBUG   SystemMonitor:3794161 [system_monitor.py:_start():183] Publishing last batch of metrics
+2024-05-05 03:43:48,644 INFO    HandlerThread:3794161 [interfaces.py:finish():202] Joined cpu monitor
+2024-05-05 03:43:48,644 INFO    HandlerThread:3794161 [interfaces.py:finish():202] Joined disk monitor
+2024-05-05 03:43:48,702 INFO    HandlerThread:3794161 [interfaces.py:finish():202] Joined gpu monitor
+2024-05-05 03:43:48,702 INFO    HandlerThread:3794161 [interfaces.py:finish():202] Joined memory monitor
+2024-05-05 03:43:48,702 INFO    HandlerThread:3794161 [interfaces.py:finish():202] Joined network monitor
+2024-05-05 03:43:48,702 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: defer
+2024-05-05 03:43:48,702 INFO    SenderThread:3794161 [sender.py:send_request_defer():609] handle sender defer: 2
+2024-05-05 03:43:48,702 INFO    SenderThread:3794161 [sender.py:transition_state():613] send defer: 3
+2024-05-05 03:43:48,702 DEBUG   SenderThread:3794161 [sender.py:send():380] send: stats
+2024-05-05 03:43:48,703 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: defer
+2024-05-05 03:43:48,703 INFO    HandlerThread:3794161 [handler.py:handle_request_defer():172] handle defer: 3
+2024-05-05 03:43:48,703 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: defer
+2024-05-05 03:43:48,703 INFO    SenderThread:3794161 [sender.py:send_request_defer():609] handle sender defer: 3
+2024-05-05 03:43:48,703 INFO    SenderThread:3794161 [sender.py:transition_state():613] send defer: 4
+2024-05-05 03:43:48,703 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: defer
+2024-05-05 03:43:48,703 INFO    HandlerThread:3794161 [handler.py:handle_request_defer():172] handle defer: 4
+2024-05-05 03:43:48,703 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: defer
+2024-05-05 03:43:48,703 INFO    SenderThread:3794161 [sender.py:send_request_defer():609] handle sender defer: 4
+2024-05-05 03:43:48,703 INFO    SenderThread:3794161 [sender.py:transition_state():613] send defer: 5
+2024-05-05 03:43:48,703 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: defer
+2024-05-05 03:43:48,703 INFO    HandlerThread:3794161 [handler.py:handle_request_defer():172] handle defer: 5
+2024-05-05 03:43:48,704 DEBUG   SenderThread:3794161 [sender.py:send():380] send: summary
+2024-05-05 03:43:48,704 INFO    SenderThread:3794161 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2024-05-05 03:43:48,704 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: defer
+2024-05-05 03:43:48,704 INFO    SenderThread:3794161 [sender.py:send_request_defer():609] handle sender defer: 5
+2024-05-05 03:43:48,704 INFO    SenderThread:3794161 [sender.py:transition_state():613] send defer: 6
+2024-05-05 03:43:48,704 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: defer
+2024-05-05 03:43:48,704 INFO    HandlerThread:3794161 [handler.py:handle_request_defer():172] handle defer: 6
+2024-05-05 03:43:48,704 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: defer
+2024-05-05 03:43:48,704 INFO    SenderThread:3794161 [sender.py:send_request_defer():609] handle sender defer: 6
+2024-05-05 03:43:48,705 INFO    SenderThread:3794161 [sender.py:transition_state():613] send defer: 7
+2024-05-05 03:43:48,705 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: status_report
+2024-05-05 03:43:48,705 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: defer
+2024-05-05 03:43:48,705 INFO    HandlerThread:3794161 [handler.py:handle_request_defer():172] handle defer: 7
+2024-05-05 03:43:48,705 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: defer
+2024-05-05 03:43:48,705 INFO    SenderThread:3794161 [sender.py:send_request_defer():609] handle sender defer: 7
+2024-05-05 03:43:49,588 INFO    Thread-12 :3794161 [dir_watcher.py:_on_file_modified():288] file/dir modified: /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/wandb-summary.json
+2024-05-05 03:43:49,630 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: poll_exit
+2024-05-05 03:43:50,596 INFO    SenderThread:3794161 [sender.py:transition_state():613] send defer: 8
+2024-05-05 03:43:50,597 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: poll_exit
+2024-05-05 03:43:50,597 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: defer
+2024-05-05 03:43:50,597 INFO    HandlerThread:3794161 [handler.py:handle_request_defer():172] handle defer: 8
+2024-05-05 03:43:50,598 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: defer
+2024-05-05 03:43:50,598 INFO    SenderThread:3794161 [sender.py:send_request_defer():609] handle sender defer: 8
+2024-05-05 03:43:50,598 INFO    SenderThread:3794161 [job_builder.py:build():298] Attempting to build job artifact
+2024-05-05 03:43:50,598 INFO    SenderThread:3794161 [job_builder.py:_get_source_type():428] is repo sourced job
+2024-05-05 03:43:50,630 INFO    SenderThread:3794161 [job_builder.py:build():404] adding wandb-job metadata file
+2024-05-05 03:43:50,631 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: poll_exit
+2024-05-05 03:43:50,636 INFO    SenderThread:3794161 [sender.py:transition_state():613] send defer: 9
+2024-05-05 03:43:50,636 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: poll_exit
+2024-05-05 03:43:50,636 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: defer
+2024-05-05 03:43:50,636 INFO    HandlerThread:3794161 [handler.py:handle_request_defer():172] handle defer: 9
+2024-05-05 03:43:50,636 DEBUG   SenderThread:3794161 [sender.py:send():380] send: artifact
+2024-05-05 03:43:51,051 INFO    wandb-upload_0:3794161 [upload_job.py:push():86] Skipped uploading /home/hy2611/.local/share/wandb/artifacts/staging/tmp_kp9eckw
+2024-05-05 03:43:51,295 INFO    wandb-upload_1:3794161 [upload_job.py:push():89] Uploaded file /home/hy2611/.local/share/wandb/artifacts/staging/tmpdjbxswq4
+2024-05-05 03:43:51,589 INFO    Thread-12 :3794161 [dir_watcher.py:_on_file_modified():288] file/dir modified: /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/output.log
+2024-05-05 03:43:51,632 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: poll_exit
+2024-05-05 03:43:52,051 INFO    SenderThread:3794161 [sender.py:send_artifact():1458] sent artifact job-https___github.com_Harry-Yang0518_ML_Competition.git_main.py - {'id': 'QXJ0aWZhY3Q6ODIxNzMyMjMx', 'state': 'PENDING', 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjE3MDcyODMwMA==', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6ODIxNzI4NDk2', 'versionIndex': 1}}}
+2024-05-05 03:43:52,052 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: defer
+2024-05-05 03:43:52,052 INFO    SenderThread:3794161 [sender.py:send_request_defer():609] handle sender defer: 9
+2024-05-05 03:43:52,052 INFO    SenderThread:3794161 [dir_watcher.py:finish():358] shutting down directory watcher
+2024-05-05 03:43:52,591 INFO    SenderThread:3794161 [dir_watcher.py:finish():388] scan: /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files
+2024-05-05 03:43:52,591 INFO    SenderThread:3794161 [dir_watcher.py:finish():402] scan save: /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/conda-environment.yaml conda-environment.yaml
+2024-05-05 03:43:52,591 INFO    SenderThread:3794161 [dir_watcher.py:finish():402] scan save: /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/wandb-metadata.json wandb-metadata.json
+2024-05-05 03:43:52,592 INFO    SenderThread:3794161 [dir_watcher.py:finish():402] scan save: /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/config.yaml config.yaml
+2024-05-05 03:43:52,592 INFO    SenderThread:3794161 [dir_watcher.py:finish():402] scan save: /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/requirements.txt requirements.txt
+2024-05-05 03:43:52,601 INFO    SenderThread:3794161 [dir_watcher.py:finish():402] scan save: /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/wandb-summary.json wandb-summary.json
+2024-05-05 03:43:52,601 INFO    SenderThread:3794161 [dir_watcher.py:finish():402] scan save: /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/output.log output.log
+2024-05-05 03:43:52,602 INFO    SenderThread:3794161 [sender.py:transition_state():613] send defer: 10
+2024-05-05 03:43:52,602 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: poll_exit
+2024-05-05 03:43:52,602 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: defer
+2024-05-05 03:43:52,602 INFO    HandlerThread:3794161 [handler.py:handle_request_defer():172] handle defer: 10
+2024-05-05 03:43:52,603 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: defer
+2024-05-05 03:43:52,603 INFO    SenderThread:3794161 [sender.py:send_request_defer():609] handle sender defer: 10
+2024-05-05 03:43:52,603 INFO    SenderThread:3794161 [file_pusher.py:finish():175] shutting down file pusher
+2024-05-05 03:43:52,632 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: poll_exit
+2024-05-05 03:43:52,633 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: poll_exit
+2024-05-05 03:43:52,780 INFO    wandb-upload_0:3794161 [upload_job.py:push():131] Uploaded file /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/conda-environment.yaml
+2024-05-05 03:43:52,820 INFO    wandb-upload_1:3794161 [upload_job.py:push():131] Uploaded file /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/config.yaml
+2024-05-05 03:43:52,838 INFO    wandb-upload_2:3794161 [upload_job.py:push():131] Uploaded file /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/requirements.txt
+2024-05-05 03:43:52,843 INFO    wandb-upload_3:3794161 [upload_job.py:push():131] Uploaded file /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/wandb-summary.json
+2024-05-05 03:43:52,864 INFO    wandb-upload_4:3794161 [upload_job.py:push():131] Uploaded file /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/files/output.log
+2024-05-05 03:43:53,064 INFO    Thread-11 (_thread_body):3794161 [sender.py:transition_state():613] send defer: 11
+2024-05-05 03:43:53,065 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: defer
+2024-05-05 03:43:53,065 INFO    HandlerThread:3794161 [handler.py:handle_request_defer():172] handle defer: 11
+2024-05-05 03:43:53,065 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: defer
+2024-05-05 03:43:53,065 INFO    SenderThread:3794161 [sender.py:send_request_defer():609] handle sender defer: 11
+2024-05-05 03:43:53,066 INFO    SenderThread:3794161 [file_pusher.py:join():181] waiting for file pusher
+2024-05-05 03:43:53,066 INFO    SenderThread:3794161 [sender.py:transition_state():613] send defer: 12
+2024-05-05 03:43:53,066 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: defer
+2024-05-05 03:43:53,066 INFO    HandlerThread:3794161 [handler.py:handle_request_defer():172] handle defer: 12
+2024-05-05 03:43:53,066 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: defer
+2024-05-05 03:43:53,066 INFO    SenderThread:3794161 [sender.py:send_request_defer():609] handle sender defer: 12
+2024-05-05 03:43:53,067 INFO    SenderThread:3794161 [file_stream.py:finish():595] file stream finish called
+2024-05-05 03:43:53,268 INFO    SenderThread:3794161 [file_stream.py:finish():599] file stream finish is done
+2024-05-05 03:43:53,269 INFO    SenderThread:3794161 [sender.py:transition_state():613] send defer: 13
+2024-05-05 03:43:53,269 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: defer
+2024-05-05 03:43:53,269 INFO    HandlerThread:3794161 [handler.py:handle_request_defer():172] handle defer: 13
+2024-05-05 03:43:53,269 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: defer
+2024-05-05 03:43:53,270 INFO    SenderThread:3794161 [sender.py:send_request_defer():609] handle sender defer: 13
+2024-05-05 03:43:53,270 INFO    SenderThread:3794161 [sender.py:transition_state():613] send defer: 14
+2024-05-05 03:43:53,270 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: defer
+2024-05-05 03:43:53,270 INFO    HandlerThread:3794161 [handler.py:handle_request_defer():172] handle defer: 14
+2024-05-05 03:43:53,270 DEBUG   SenderThread:3794161 [sender.py:send():380] send: final
+2024-05-05 03:43:53,271 DEBUG   SenderThread:3794161 [sender.py:send():380] send: footer
+2024-05-05 03:43:53,271 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: defer
+2024-05-05 03:43:53,271 INFO    SenderThread:3794161 [sender.py:send_request_defer():609] handle sender defer: 14
+2024-05-05 03:43:53,272 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: poll_exit
+2024-05-05 03:43:53,272 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: poll_exit
+2024-05-05 03:43:53,273 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: server_info
+2024-05-05 03:43:53,273 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: get_summary
+2024-05-05 03:43:53,273 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: sampled_history
+2024-05-05 03:43:53,273 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: internal_messages
+2024-05-05 03:43:53,274 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: poll_exit
+2024-05-05 03:43:53,275 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: poll_exit
+2024-05-05 03:43:53,275 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: server_info
+2024-05-05 03:43:53,279 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: job_info
+2024-05-05 03:43:53,318 DEBUG   SenderThread:3794161 [sender.py:send_request():407] send_request: job_info
+2024-05-05 03:43:53,318 INFO    MainThread:3794161 [wandb_run.py:_footer_history_summary_info():3760] rendering history
+2024-05-05 03:43:53,319 INFO    MainThread:3794161 [wandb_run.py:_footer_history_summary_info():3792] rendering summary
+2024-05-05 03:43:53,319 INFO    MainThread:3794161 [wandb_run.py:_footer_sync_info():3719] logging synced files
+2024-05-05 03:43:53,319 DEBUG   HandlerThread:3794161 [handler.py:handle_request():146] handle_request: shutdown
+2024-05-05 03:43:53,320 INFO    HandlerThread:3794161 [handler.py:finish():866] shutting down handler
+2024-05-05 03:43:54,279 INFO    WriterThread:3794161 [datastore.py:close():294] close: /scratch/hy2611/ML_Competition/wandb/run-20240505_034036-f7ja7phq/run-f7ja7phq.wandb
+2024-05-05 03:43:54,320 INFO    SenderThread:3794161 [sender.py:finish():1536] shutting down sender
+2024-05-05 03:43:54,320 INFO    SenderThread:3794161 [file_pusher.py:finish():175] shutting down file pusher
+2024-05-05 03:43:54,321 INFO    SenderThread:3794161 [file_pusher.py:join():181] waiting for file pusher

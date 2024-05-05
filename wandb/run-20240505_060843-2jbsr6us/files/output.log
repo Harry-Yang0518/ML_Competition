@@ -1,0 +1,15 @@
+
+Extracted contents to /scratch/hy2611/ML_Competition/dataset
+Extracted contents to /scratch/hy2611/ML_Competition/dataset
+Epoch 1, Loss: 1.2747058868408203, Validation Accuracy: 0.46719932716568546
+Epoch 2, Loss: 1.1819950342178345, Validation Accuracy: 0.47098402018502944
+Epoch 3, Loss: 1.2327985763549805, Validation Accuracy: 0.46551724137931033
+Epoch 4, Loss: 1.2551273107528687, Validation Accuracy: 0.4768713204373423
+Epoch 5, Loss: 1.2561841011047363, Validation Accuracy: 0.4751892346509672
+Epoch 6, Loss: 1.1497772932052612, Validation Accuracy: 0.468040370058873
+Epoch 7, Loss: 1.1913244724273682, Validation Accuracy: 0.47098402018502944
+Epoch 8, Loss: 1.1524291038513184, Validation Accuracy: 0.4751892346509672
+Epoch 9, Loss: 1.175791621208191, Validation Accuracy: 0.48107653490328006
+Epoch 10, Loss: 1.3055179119110107, Validation Accuracy: 0.47056349873843567
+Epoch 11, Loss: 1.290144443511963, Validation Accuracy: 0.47560975609756095
+Epoch 12, Loss: 1.2537217140197754, Validation Accuracy: 0.4768713204373423

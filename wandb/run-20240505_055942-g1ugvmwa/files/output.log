@@ -1,0 +1,35 @@
+
+Extracted contents to /scratch/hy2611/ML_Competition/dataset
+Extracted contents to /scratch/hy2611/ML_Competition/dataset
+Epoch 1, Loss: 1.020210862159729, Validation Accuracy: 0.6042893187552565
+Epoch 2, Loss: 0.9780687093734741, Validation Accuracy: 0.48570227081581163
+Epoch 3, Loss: 0.8017513751983643, Validation Accuracy: 0.6286795626576955
+Epoch 4, Loss: 0.7574191689491272, Validation Accuracy: 0.5904121110176619
+Epoch 5, Loss: 0.7433944940567017, Validation Accuracy: 0.7628259041211102
+Epoch 6, Loss: 0.7488768100738525, Validation Accuracy: 0.7434819175777965
+Epoch 7, Loss: 0.698250949382782, Validation Accuracy: 0.7375946173254836
+Epoch 8, Loss: 0.6283925771713257, Validation Accuracy: 0.7308662741799832
+Epoch 9, Loss: 0.642113208770752, Validation Accuracy: 0.8208578637510513
+Epoch 10, Loss: 0.6473729014396667, Validation Accuracy: 0.7901597981497056
+Epoch 11, Loss: 0.5679981708526611, Validation Accuracy: 0.7060555088309504
+Epoch 12, Loss: 0.5870362520217896, Validation Accuracy: 0.755677039529016
+Epoch 13, Loss: 0.5317350625991821, Validation Accuracy: 0.7809083263246426
+Epoch 14, Loss: 0.5258187055587769, Validation Accuracy: 0.8301093355761143
+Epoch 15, Loss: 0.5307504534721375, Validation Accuracy: 0.8502943650126157
+Epoch 16, Loss: 0.5162876844406128, Validation Accuracy: 0.8700588730025232
+Epoch 17, Loss: 0.48228251934051514, Validation Accuracy: 0.8002523128679563
+Epoch 18, Loss: 0.4588075280189514, Validation Accuracy: 0.7771236333052985
+Epoch 19, Loss: 0.5120249390602112, Validation Accuracy: 0.7796467619848613
+Epoch 20, Loss: 0.4934637248516083, Validation Accuracy: 0.8385197645079899
+Epoch 21, Loss: 0.44067201018333435, Validation Accuracy: 0.8347350714886459
+Epoch 22, Loss: 0.4691653847694397, Validation Accuracy: 0.8641715727502103
+Epoch 23, Loss: 0.3971129059791565, Validation Accuracy: 0.7577796467619848
+Epoch 24, Loss: 0.40945231914520264, Validation Accuracy: 0.7077375946173254
+Epoch 25, Loss: 0.4051114618778229, Validation Accuracy: 0.7981497056349874
+Epoch 26, Loss: 0.44992566108703613, Validation Accuracy: 0.7846930193439865
+Epoch 27, Loss: 0.4008300304412842, Validation Accuracy: 0.7922624053826746
+Epoch 28, Loss: 0.4788769483566284, Validation Accuracy: 0.7918418839360808
+Epoch 29, Loss: 0.39184534549713135, Validation Accuracy: 0.8078216989066442
+Epoch 30, Loss: 0.41433173418045044, Validation Accuracy: 0.875946173254836
+Epoch 31, Loss: 0.42865419387817383, Validation Accuracy: 0.7872161480235492
+Epoch 32, Loss: 0.4163438081741333, Validation Accuracy: 0.8317914213624895

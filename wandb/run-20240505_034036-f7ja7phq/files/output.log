@@ -1,0 +1,18 @@
+
+Extracted contents to /scratch/hy2611/ML_Competition/dataset
+Extracted contents to /scratch/hy2611/ML_Competition/dataset
+Epoch 1, Loss: 1.2440308332443237, Validation Accuracy: 0.43986543313709
+Epoch 2, Loss: 1.3998867273330688, Validation Accuracy: 0.4449116904962153
+Epoch 3, Loss: 1.2155301570892334, Validation Accuracy: 0.4449116904962153
+Traceback (most recent call last):
+  File "/scratch/hy2611/ML_Competition/main.py", line 107, in <module>
+    main()
+  File "/scratch/hy2611/ML_Competition/main.py", line 82, in main
+    loss = criterion(outputs, labels)
+  File "/ext3/miniconda3/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/ext3/miniconda3/lib/python3.10/site-packages/torch/nn/modules/loss.py", line 1174, in forward
+    return F.cross_entropy(input, target, weight=self.weight,
+  File "/ext3/miniconda3/lib/python3.10/site-packages/torch/nn/functional.py", line 3029, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(input, target, weight, _Reduction.get_enum(reduction), ignore_index, label_smoothing)
+KeyboardInterrupt

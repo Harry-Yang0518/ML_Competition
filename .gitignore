@@ -6,3 +6,4 @@ submit/
 test_predictions.csv
 test_predictions1.csv
 test_predictions2.csv
+wandb/

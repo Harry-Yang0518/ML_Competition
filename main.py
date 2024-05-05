@@ -33,7 +33,7 @@ def main():
     os.environ["WANDB_API_KEY"] = "cd3fbdd397ddb5a83b1235d177f4d81ce1200dbb"
     os.environ["WANDB_MODE"] = "online" #"dryrun"
     wandb.login(key='cd3fbdd397ddb5a83b1235d177f4d81ce1200dbb')
-    wandb.init(project="ML_Competition",name='etf_34_adam_cosine')
+    wandb.init(project="ML_Competition1",name='18_ADAM_step')
     #wandb.config.update(args)
     
 
@@ -51,19 +51,19 @@ def main():
     train_loader, val_loader, test_loader = initialize_data_loader(dataset_dir, tar_paths, batch_size=64, split_ratio=0.8, augmentations=audio_augs)
 
     # Define model, loss function, and optimizer
-    #model = AudioResNet(BasicBlock, [2, 2, 2, 2], num_classes=4, num_mels=128).to(device)
-    model = AudioResNet(BasicBlock, [3, 4, 6, 3], num_classes=4, num_mels=128).to(device)
+    model = AudioResNet(BasicBlock, [2, 2, 2, 2], num_classes=4, num_mels=128, use_etf=True).to(device)
+    #model = AudioResNet(BasicBlock, [3, 4, 6, 3], num_classes=4, num_mels=128).to(device)
     #model = SoundNetRaw(nf=32, clip_length=3, embed_dim=128, n_layers=4, nhead=8, factors=[4, 4, 4, 4], n_classes=4, dim_feedforward=512).to(device)
 
     criterion = nn.CrossEntropyLoss(label_smoothing=0.1)
     #optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9, weight_decay=0.0005)
-    optimizer = optim.Adam(model.parameters(), lr=3e-4, weight_decay=0.0005)
+    optimizer = optim.Adam(model.parameters(), lr=3e-2, weight_decay=0.0005)
     # optimizer = torch.optim.AdamW(model.parameters(),
     #                         lr=3e-4,
     #                         betas=[0.9, 0.99],
     #                         weight_decay=0)
-    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=100, eta_min=0.0001)
-    #scheduler = StepLR(optimizer, step_size=15, gamma=0.1)
+    #scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=100, eta_min=0.0001)
+    scheduler = StepLR(optimizer, step_size=50, gamma=0.1)
     # scheduler = torch.optim.lr_scheduler.OneCycleLR(optimizer,
     #                                                    max_lr=3e-4,
     #                                                    steps_per_epoch=len(train_loader),
@@ -73,7 +73,7 @@ def main():
     model.to(device)
 
     # Training loop
-    num_epochs = 100
+    num_epochs = 200
     for epoch in range(num_epochs):
         model.train()
         for inputs, labels in train_loader:

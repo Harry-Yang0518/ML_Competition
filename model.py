@@ -26,7 +26,7 @@ class BasicBlock(nn.Module):
         return out
 
 class AudioResNet(nn.Module):
-    def __init__(self, block, num_blocks, num_classes=4, num_mels=128, use_etf=True):
+    def __init__(self, block, num_blocks, num_classes=4, num_mels=128, use_etf=False):
         super(AudioResNet, self).__init__()
         self.in_planes = 64
         self.num_classes = num_classes

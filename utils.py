@@ -10,9 +10,10 @@ from scipy.sparse import coo_matrix
 from scipy.signal import firwin, butter, lfilter
 
 class AudioAugs:
-    def __init__(self, augs, fs=22050):
+    def __init__(self, augs, fs=22050, ir_path=None):
         self.augs = augs
         self.fs = fs
+        self.ir_path = ir_path
         self.transformations = {
             'white_noise': self.add_white_noise,
             'time_shift': self.time_shift,
@@ -21,6 +22,10 @@ class AudioAugs:
             'add_reverb': self.add_reverb,
             'low_pass_filter': self.low_pass_filter,
         }
+        if ir_path:
+            self.impulse_response = torchaudio.load(ir_path)[0]
+        else:
+            self.impulse_response = None
     
     def __call__(self, sample):
         if not self.augs:
@@ -49,11 +54,10 @@ class AudioAugs:
         return torch.from_numpy(sample_shifted).float()
 
     def add_reverb(self, sample):
-        reverb = T.Reverberate(
-            reverb_factor=random.uniform(0.2, 0.5),
-            sampling_rate=self.fs
-        )
-        return reverb(sample)
+        if self.impulse_response is None:
+            return sample  # No impulse response loaded, return unmodified sample
+        reverb_signal = torch.nn.functional.conv1d(sample[None, ...], self.impulse_response[None, ...], padding='same')
+        return reverb_signal[0]
 
     def low_pass_filter(self, sample):
         cutoff_freq = random.uniform(300, 3000)  # Cutoff frequency in Hz
